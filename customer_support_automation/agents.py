@@ -1,20 +1,24 @@
 from crewai import Agent 
 
+from llm import get_llm
+
+
+llm = get_llm()
+
 support_agent = Agent(
-    role="Senior Support Representative",
-    goal="Be the most friendly and helpful"
+    role = "Senior Support Representative",
+    goal = "Be the most friendly and helpful"
         "support representative in your team",
-    backstory=(
-        "You work at CrewAI (https://crewai.com) and "
+    backstory = "You work at CrewAI (https://crewai.com) and "
         "are now working on providing "
         "support to {customer}, a super important customer "
         "for your company "
         "You need to make sure that you provide the best support! "
         "Make sure to provide full complete answer "
-        "and make no assumptions."
-    ),
-    allow_delegation=False,
-    verbose=True
+        "and make no assumptions.",
+    llm = llm,
+    allow_delegation = False,
+    verbose =True
 )
 
 support_quality_assurance_agent = Agent(
@@ -31,5 +35,6 @@ support_quality_assurance_agent = Agent(
         "is providing full"
         "complete answers, make no assumptions"
     ),
+    llm=llm,
     verbose=True
 )

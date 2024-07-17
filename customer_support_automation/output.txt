@@ -1,0 +1,53 @@
+Hey DeepLearningAI,
+
+Thanks for reaching out! I'm happy to help you with enabling memory for your agents and kicking off your Crew. 
+
+Let's break down how to enable memory for your agents:
+
+```python
+from langchain.llms import OpenAI
+from crewai import Agent
+
+os.environ["OPENAI_API_KEY"] = "Your OpenAI Key"
+
+# Creating an agent with memory enabled
+researcher = Agent(
+    role='Senior Researcher',
+    goal='Uncover groundbreaking technologies in {topic}',
+    backstory=("Driven by curiosity, you're at the forefront of innovation, "
+    "eager to explore and share knowledge that could change the world."),
+    memory=True, # Enable memory for the agent
+    verbose=True,
+    allow_delegation=False,
+    tools=[search_tool, browser_tool],
+    allow_code_execution=False,
+    max_iter=15,
+    max_rpm=100,
+    max_execution_time=3600,
+    system_template="Your custom system template here",
+    prompt_template="Your custom prompt template here",
+    response_template="Your custom response template here",
+)
+```
+
+By setting `memory=True` when creating your agent, you're enabling the agent to store and recall past conversations and actions. This allows for more contextual and coherent interactions within the Crew.
+
+Now, to kick off your Crew, you'll need to use the `Crew` class from the `crewai` library:
+
+```python
+from crewai import Crew
+
+# Create a Crew instance
+my_crew = Crew(
+    name="My Research Crew",
+    agents=[researcher], # Add your agent with memory enabled
+    # ... other Crew parameters
+)
+
+# Kick off the Crew
+my_crew.run()
+```
+
+This code will create a Crew named "My Research Crew" with your memory-enabled researcher agent. The `.run()` method starts the Crew, allowing your agents to begin interacting with each other and completing tasks.
+
+Let me know if you have any other questions. I'm here to help you get the most out of CrewAI!
